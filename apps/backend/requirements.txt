@@ -7,7 +7,6 @@ python-jose==3.3.0
 passlib[bcrypt]==1.7.4
 psycopg2-binary==2.9.6
 redis==5.0.0
-webauthn==2.0.2
 authlib==1.2.0
 cryptography==41.0.3
 python-multipart==0.0.6

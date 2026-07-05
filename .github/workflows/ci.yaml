@@ -47,9 +47,11 @@ jobs:
         run: pnpm -w -r run lint || true
       - name: Run Python tests
         run: |
+          cd apps/backend
           pytest -q
       - name: Upload coverage
         if: always()
         run: |
+          cd apps/backend
           coverage run -m pytest || true
           coverage xml || true
