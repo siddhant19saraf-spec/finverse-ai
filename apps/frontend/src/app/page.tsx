@@ -6,8 +6,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import {
   Brain, Shield, LineChart, MessageSquare, Lock, ArrowRight,
-  CheckCircle2, ChevronRight, Star, TrendingUp, Globe, Cpu,
-  ArrowUpRight, ArrowDownRight
+  Globe, Cpu, ArrowUpRight, ArrowDownRight
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -154,43 +153,22 @@ export default function LandingPage() {
         </div>
       </nav>
 
-      {/* Hero */}
+      {/* Hero — CSS animations (SSR-safe, no opacity:0 on server) */}
       <section className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 pt-16 lg:pt-20 pb-24 lg:pb-32 text-center">
-        <motion.div
-          initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-xs text-muted-foreground mb-8">
-            <Cpu className="w-3.5 h-3.5 text-primary" />
-            <span>{t("landing.indiaFirst")}</span>
-          </div>
-        </motion.div>
+        <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-xs text-muted-foreground mb-8 ${prefersReducedMotion ? "" : "animate-slide-up-fade"}`} style={{ animationDelay: "0s" }}>
+          <Cpu className="w-3.5 h-3.5 text-primary" />
+          <span>{t("landing.indiaFirst")}</span>
+        </div>
 
-        <motion.h1
-          initial={prefersReducedMotion ? {} : { opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold tracking-tight mb-6"
-        >
+        <h1 className={`text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold tracking-tight mb-6 ${prefersReducedMotion ? "" : "animate-slide-up-fade"}`} style={{ animationDelay: "0.1s" }}>
           <span className="text-gradient">{t("landing.hero")}</span>
-        </motion.h1>
+        </h1>
 
-        <motion.p
-          initial={prefersReducedMotion ? {} : { opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12"
-        >
+        <p className={`text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 ${prefersReducedMotion ? "" : "animate-slide-up-fade"}`} style={{ animationDelay: "0.2s" }}>
           {t("landing.heroSubtitle")}
-        </motion.p>
+        </p>
 
-        <motion.div
-          initial={prefersReducedMotion ? {} : { opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
-        >
+        <div className={`flex flex-col sm:flex-row items-center justify-center gap-4 ${prefersReducedMotion ? "" : "animate-slide-up-fade"}`} style={{ animationDelay: "0.3s" }}>
           <Link href="/signup">
             <Button size="lg" className="text-base px-8 w-full sm:w-auto">
               {t("landing.startFreeTrial")} <ArrowRight className="w-5 h-5 ml-2" />
@@ -199,15 +177,10 @@ export default function LandingPage() {
           <Button variant="outline" size="lg" className="text-base px-8 w-full sm:w-auto" onClick={handleDemo}>
             {t("landing.viewDemo")}
           </Button>
-        </motion.div>
+        </div>
 
         {/* Hero Video */}
-        <motion.div
-          initial={prefersReducedMotion ? {} : { opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="mt-12 lg:mt-16 max-w-3xl mx-auto"
-        >
+        <div className={`mt-12 lg:mt-16 max-w-3xl mx-auto ${prefersReducedMotion ? "" : "animate-slide-up-fade"}`} style={{ animationDelay: "0.4s" }}>
           <div className="relative aspect-video rounded-2xl overflow-hidden glass-card border border-white/10 shadow-2xl shadow-primary/10">
             <iframe
               src="https://www.youtube.com/embed/grnjv6gmKmA?si=GhBfHwZcGHn_-Onc"
@@ -220,16 +193,10 @@ export default function LandingPage() {
           <p className="text-sm text-muted-foreground mt-4 text-center">
             Watch how FINVERSE AI transforms wealth management with explainable intelligence
           </p>
-        </motion.div>
+        </div>
 
         {/* Dashboard Preview */}
-        <motion.div
-          initial={prefersReducedMotion ? {} : { opacity: 0, y: 60 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.5 }}
-          className="mt-16 lg:mt-20 relative"
-          aria-hidden="true"
-        >
+        <div className={`mt-16 lg:mt-20 relative ${prefersReducedMotion ? "" : "animate-slide-up-fade"}`} style={{ animationDelay: "0.5s" }} aria-hidden="true">
           <div className="absolute inset-0 bg-gradient-to-t from-hero-gradient via-transparent to-transparent z-10" />
           <div className="glass-card p-3 lg:p-4 rounded-2xl border border-white/10 shadow-2xl shadow-primary/10">
             <div className="bg-gradient-to-br from-[#0d1117] to-[#0a0a1a] rounded-xl p-4 lg:p-6 h-[300px] lg:h-[400px]">
@@ -240,35 +207,27 @@ export default function LandingPage() {
                 <div className="w-3 h-3 rounded-full bg-green-500/80" />
                 <span className="text-xs text-muted-foreground ml-2">FINVERSE AI — Dashboard</span>
               </div>
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4 stagger-children">
                 {[
                   { label: "Portfolio Value", value: "₹24.58L", color: "from-blue-500 to-cyan-400" },
                   { label: "Risk Score", value: "72/100", color: "from-emerald-500 to-teal-400" },
                   { label: "Goal Progress", value: "45%", color: "from-purple-500 to-pink-400" },
                   { label: "Market", value: "↑0.45%", color: "from-amber-500 to-orange-400" },
-                ].map((item, i) => (
-                  <motion.div
-                    key={item.label}
-                    initial={prefersReducedMotion ? {} : { opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.8 + i * 0.1 }}
-                    className="glass-card p-3 lg:p-4 rounded-xl"
-                  >
+                ].map((item) => (
+                  <div key={item.label} className="glass-card p-3 lg:p-4 rounded-xl">
                     <div className="text-xl lg:text-2xl font-bold text-gradient mb-1">{item.value}</div>
                     <div className="text-xs text-muted-foreground">{item.label}</div>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
               {/* Mock chart area */}
               <div className="mt-4 lg:mt-6 grid grid-cols-3 gap-3 lg:gap-4">
                 <div className="col-span-2 glass-card rounded-xl p-4 h-32 lg:h-40 flex items-end gap-1">
                   {[40, 65, 45, 80, 55, 70, 90, 75, 85, 95, 88, 92].map((h, i) => (
-                    <motion.div
+                    <div
                       key={i}
-                      initial={{ height: 0 }}
-                      animate={{ height: `${h}%` }}
-                      transition={{ delay: 1.2 + i * 0.05, duration: 0.5 }}
-                      className="flex-1 bg-gradient-to-t from-primary/20 to-primary/60 rounded-t"
+                      className="flex-1 bg-gradient-to-t from-primary/20 to-primary/60 rounded-t animate-fade-in-up"
+                      style={{ height: `${h}%`, animationDelay: `${1.2 + i * 0.05}s`, animationFillMode: "both" }}
                     />
                   ))}
                 </div>
@@ -287,11 +246,9 @@ export default function LandingPage() {
                           <span>{a.pct}%</span>
                         </div>
                         <div className="h-1.5 bg-white/5 rounded-full overflow-hidden">
-                          <motion.div
-                            initial={{ width: 0 }}
-                            animate={{ width: `${a.pct}%` }}
-                            transition={{ delay: 1.5, duration: 0.8 }}
-                            className={`h-full ${a.color} rounded-full`}
+                          <div
+                            className={`h-full ${a.color} rounded-full animate-fade-in-up`}
+                            style={{ width: `${a.pct}%`, animationDelay: "1.5s", animationFillMode: "both" }}
                           />
                         </div>
                       </div>
@@ -301,7 +258,7 @@ export default function LandingPage() {
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
       </section>
 
       {/* Stats */}
