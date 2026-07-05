@@ -1,0 +1,10 @@
+{
+  "name": "@finverse/ui",
+  "version": "0.1.0",
+  "private": true,
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "echo \"Build step for UI package\"",
+    "dev": "echo \"Dev for UI package\""
+  }
+}

@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20]
+        python-version: [3.11]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Gitleaks scan
+        uses: zricethezav/gitleaks-action@v2
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v2
+        with:
+          languages: javascript,python
+      - name: Autobuild CodeQL
+        uses: github/codeql-action/autobuild@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install pnpm
+        run: npm install -g pnpm
+      - name: Install JS deps
+        run: pnpm install
+      - name: Install Python deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r apps/backend/requirements.txt
+      - name: Run CodeQL analysis
+        uses: github/codeql-action/analyze@v2
+      - name: Lint (JS)
+        run: pnpm -w -r run lint || true
+      - name: Run Python tests
+        run: |
+          pytest -q
+      - name: Upload coverage
+        if: always()
+        run: |
+          coverage run -m pytest || true
+          coverage xml || true

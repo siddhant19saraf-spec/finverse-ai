@@ -1,0 +1,16 @@
+{
+  "name": "finverse-ai",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:frontend": "pnpm --filter @finverse/frontend dev",
+    "dev:backend": "pnpm --filter @finverse/backend dev",
+    "dev": "pnpm -w -r run dev",
+    "build": "pnpm -w -r run build",
+    "lint": "eslint . --ext .ts,.tsx,.js,.jsx,.py"
+  }
+}
