@@ -16,19 +16,15 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install dependencies
-        working-directory: apps/backend
         run: |
+          cd apps/backend
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-      - name: Debug - test import
-        working-directory: apps/backend
-        run: |
-          python -c "import sys; print('PYTHONPATH:', sys.path); import app.main; print('Import OK')"
-          python -m pytest --collect-only -q 2>&1 || echo "COLLECTION FAILED"
       - name: Run tests
-        working-directory: apps/backend
         run: |
-          python -m pytest -v --tb=long 2>&1 || true
+          cd apps/backend
+          python -c "import sys; sys.path.insert(0, '.'); from app.main import app; print('Import OK')"
+          python -m pytest tests/ -v --tb=long 2>&1 || true
 
   frontend:
     runs-on: ubuntu-latest
