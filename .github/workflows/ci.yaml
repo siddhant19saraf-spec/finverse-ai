@@ -23,7 +23,6 @@ jobs:
       - name: Run tests
         run: |
           cd apps/backend
-          python -c "import sys; sys.path.insert(0, 'tests'); print('PYTHONPATH:', sys.path)"
           python -m pytest tests/ -v --tb=long 2>&1
         shell: bash
         continue-on-error: true
